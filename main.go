@@ -1,9 +1,13 @@
 package main
 
 import (
-	"fmt"
+	"log"
+
+	"github.com/sudamichiyo/pokopea-meguri/db"
 )
 
 func main() {
-	fmt.Println("Hello, Go!")
+	database := db.InitDB("db/spots.db") // SQLiteファイル名
+	db.CreateTable(database)
+	log.Println("DB setup OK!")
 }
