@@ -30,7 +30,8 @@ func CreateTable(db *sql.DB) {
         latitude REAL,
         longitude REAL,
         time_sec INTEGER,
-        note TEXT
+        note TEXT,
+		UNIQUE(name, video_id)
     );`
 
 	stm, err := db.Prepare(createTableSQL)
