@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8"/>
+    <title>動画検索</title>
+</head>
+<body>
+    <h1>都道府県で動画検索</h1>
+    <input type="text" id="prefecture" placeholder="例: 京都"/>
+    <button onclick="searchSpots()">検索</button>
+
+    <h2>検索結果</h2>
+    <ul id="result-list"></ul>
+
+    <script>
+        async function searchSpots() {
+            const prefecture = document.getElementById("prefecture").value.trim();
+            if (!prefecture) {
+                alert("都道府県名を入力してください");
+                return;
+            }
+
+            try {
+                const res = await fetch(`http://localhost:8080/spots?prefecture=${encodeURIComponent(prefecture)}`);
+                const data = await res.json();
+
+                const list = document.getElementById("result-list");
+                list.innerHTML = "";
+
+                if (data.length === 0) {
+                list.innerHTML = "<li>該当するスポットが見つかりませんでした</li>";
+                return;
+                }
+
+                data.forEach(spot => {
+                const li = document.createElement("li");
+                li.textContent = `${spot.name}（動画: ${spot.video_title}）`;
+                list.appendChild(li);
+                });
+
+            } catch (err) {
+                console.error("API呼び出しエラー:", err);
+                alert("データの取得に失敗しました");
+            }
+        }
+    </script>
+</body>
+</html>

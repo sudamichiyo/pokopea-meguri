@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/sudamichiyo/pokopea-meguri/db"
 	"github.com/sudamichiyo/pokopea-meguri/handlers"
@@ -23,6 +24,9 @@ func main() {
 
 	// GinのEngineのインスタンスを取得
 	r := gin.Default()
+
+	// CORS対応
+	r.Use(cors.Default())
 
 	// APIエンドポイントを設定
 	r.GET("/spots", handlers.SpotsHandler(database))
