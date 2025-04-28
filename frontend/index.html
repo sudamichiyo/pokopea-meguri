@@ -28,14 +28,21 @@
                 list.innerHTML = "";
 
                 if (data.length === 0) {
-                list.innerHTML = "<li>該当するスポットが見つかりませんでした</li>";
-                return;
+                    list.innerHTML = "<li>該当するスポットが見つかりませんでした</li>";
+                    return;
                 }
 
                 data.forEach(spot => {
-                const li = document.createElement("li");
-                li.textContent = `${spot.name}（動画: ${spot.video_title}）`;
-                list.appendChild(li);
+                    const li = document.createElement("li");
+
+                    // YouTubeのリンクを作成
+                    const link = document.createElement("a");
+                    link.href = `https://www.youtube.com/watch?v=${spot.video_id}`;
+                    link.target = "_blank"; // 新しいタブで開く
+                    link.textContent = `${spot.name}（動画: ${spot.video_title}）`;
+
+                    li.appendChild(link);
+                    document.getElementById("result-list").appendChild(li);
                 });
 
             } catch (err) {

@@ -36,6 +36,16 @@ func InsertMockData(db *sql.DB) {
 			timeSec:    120,
 			note:       "ジンベエザメが見られる水族館！",
 		},
+		{
+			name:       "アメリカンビレッジ",
+			videoTitle: "【弾丸】ついに南国へ!2泊3日の沖縄旅行へ行ってきました!!【DAY1】",
+			videoID:    "F64JNxko1Ws",
+			prefecture: "沖縄",
+			latitude:   26.6944,
+			longitude:  127.8778,
+			timeSec:    120,
+			note:       "実際に使用するデータはこんな感じ！",
+		},
 	}
 
 	for _, spot := range mockSpots {
